@@ -13,3 +13,7 @@ const newuser=await User.save({
 });
 return newuser;
  }
+
+ export const s_all_users =async (req:Request,res:Response)=>{
+    return await User.find();
+ }
