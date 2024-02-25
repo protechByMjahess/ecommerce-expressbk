@@ -39,3 +39,17 @@ return newuser;
     return "no name to search";
   }
  }
+
+ export const s_delete_user =async (req:Request,res:Response)=>{
+    const id:any = req.params.id;
+  if (id) {
+    const users = await User.findOne({ where: { id:id } });
+    if(users){
+        await User.remove(users);
+        return true;
+    }else{
+        return "user not found"
+    }
+    
+  }
+ }

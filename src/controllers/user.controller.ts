@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import { s_all_users, s_create_user, s_search_user, s_user } from "../services/user.service";
+import { s_all_users, s_create_user, s_delete_user, s_search_user, s_user } from "../services/user.service";
 import {validationResult} from "express-validator";
 
 export const all_users=async (req:Request, res:Response)=>{
@@ -31,6 +31,12 @@ export const get_user=async(req:Request, res:Response)=>{
 
 export const search_user=async(req:Request, res:Response)=>{
    const result = await s_search_user(req, res);
+   res.json(result);
+
+}
+
+export const delete_user=async(req:Request, res:Response)=>{
+   const result = await s_delete_user(req, res);
    res.json(result);
 
 }
