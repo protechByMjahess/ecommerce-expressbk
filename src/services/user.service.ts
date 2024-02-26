@@ -53,3 +53,15 @@ return newuser;
     
   }
  }
+
+ export const s_update_user =async (req:Request,res:Response)=>{
+    const uid:any =req.params.id;
+    const{name,email,phone,age}=req.body;
+
+    if (!uid || !name || !email || !phone || !age){
+        return "some data missing";
+    }else{
+        const x = await User.update({id:uid},{name:name, email:email, age:age, phone:phone});
+        return x;
+    }
+ }
