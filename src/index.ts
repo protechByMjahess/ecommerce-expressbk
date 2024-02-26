@@ -2,6 +2,7 @@ import express from "express";
 import { user_route } from "./routes/user.route";
 import { createConnection } from 'typeorm';
 import { User } from './entities/User';
+import { post_route } from "./routes/post.route";
 
 const app = express();
 
@@ -9,6 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use ("/api/users", user_route)
+app.use("/api/posts", post_route)
 
 createConnection()
   .then(async (connection) => {
