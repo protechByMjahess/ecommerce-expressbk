@@ -34,7 +34,7 @@ export const s_signup=async(req:Request,res:Response)=>{
         return r;
     } else{
         const user = await User.save({name:name,phone:phone,email:email,password:password,age:age});
-        const token = jwt.sign({ userId: user.id }, 'youtube', { expiresIn: '10s' });
+        const token = jwt.sign({ userId: user.id }, 'youtube', { expiresIn: '10d' });
        let obj ={
         user:user,
         token:token,
