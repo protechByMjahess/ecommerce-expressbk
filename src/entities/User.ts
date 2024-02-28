@@ -15,6 +15,9 @@ export class User extends BaseEntity {
   @Column({nullable:false})
   age!: string;
 
+  @Column({nullable:false, default:'123456'})
+  password!: string;
+
   @Column({nullable:true})
   email!: string;
 
