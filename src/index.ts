@@ -5,6 +5,7 @@ import { User } from './entities/User';
 import { post_route } from "./routes/post.route";
 import { auth_route } from "./routes/auth.route";
 import { isAuthenticated } from "./middleware/isAuthenticated";
+import bicycle_router from "./routes/bicycleRoutes";
 
 const app = express();
 
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use("/api/auth", auth_route)
+app.use('/api/bicycle', bicycle_router);
 
 app.use(isAuthenticated)
 app.use ("/api/users", user_route)
