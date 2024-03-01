@@ -8,10 +8,29 @@ import { isAuthenticated } from "./middleware/isAuthenticated";
 import bicycle_router from "./routes/bicycleRoutes";
 
 const app = express();
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: function (req:any, file:any, cb:any) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req:any, file:any, cb:any) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/upload', upload.single('image'), (req, res) => {
+ 
+
+  res.send('File uploaded successfully!');
+});
 
 var bodyParser = require('body-parser');
-var multer = require('multer');
-var upload = multer();
+// var multer = require('multer');
+// var upload = multer();
 
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(upload.array())
