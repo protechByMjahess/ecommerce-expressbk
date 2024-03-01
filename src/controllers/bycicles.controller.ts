@@ -11,3 +11,7 @@ export const add_bycicle=async (req:Request, res:Response) => {
       console.error(err);
       res.status(500).send('Failed to add bicycle');
     }}
+
+    export const delete_bycicle=async (req:Request, res:Response) => {
+      res.send('hello')
+    }

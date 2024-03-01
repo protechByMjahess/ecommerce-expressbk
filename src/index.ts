@@ -27,10 +27,11 @@ app.post('/insertTrackDetails', function(req,res){
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
-app.use("/api/auth", auth_route)
+// app.use("/api/auth", auth_route)
 app.use('/api/bicycle', bicycle_router);
 
-app.use(isAuthenticated)
+
+// app.use(isAuthenticated)
 app.use ("/api/users", user_route)
 app.use("/api/posts", post_route)
 
@@ -42,6 +43,6 @@ createConnection()
   })
   .catch((error) => console.log('TypeORM connection error: ', error));
 
-app.listen(3008, () => {
+app.listen(3009, () => {
   console.log('Server is running on port 3000');
 });
