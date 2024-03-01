@@ -1,19 +1,10 @@
 import express from 'express';
 import { getRepository } from 'typeorm';
 import { Bicycle } from '../entities/Bicycle';
+import { add_bycicle } from '../controllers/bycicles.controller';
 
 export const bicycle_router = express.Router();
 
-bicycle_router.post('/bicycles', async (req, res) => {
-  try {
-    const bicycleRepository = getRepository(Bicycle);
-    const newBicycle = bicycleRepository.create(req.body);
-    await bicycleRepository.save(newBicycle);
-    res.status(201).send(newBicycle);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Failed to add bicycle');
-  }
-});
+bicycle_router.post('/bicycles', add_bycicle);
 
 export default bicycle_router;
