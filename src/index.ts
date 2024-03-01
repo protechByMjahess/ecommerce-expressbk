@@ -9,6 +9,16 @@ import bicycle_router from "./routes/bicycleRoutes";
 
 const app = express();
 
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer();
+
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(upload.array())
+app.post('/insertTrackDetails', function(req,res){
+  console.log(req.body);
+  res.send('REquested data received. check in console!!!')
+})
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
