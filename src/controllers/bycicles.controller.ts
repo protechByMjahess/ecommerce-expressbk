@@ -12,6 +12,24 @@ export const add_bycicle=async (req:Request, res:Response) => {
       res.status(500).send('Failed to add bicycle');
     }}
 
-    export const delete_bycicle=async (req:Request, res:Response) => {
-      res.send('hello')
-    }
+    export const delete_bycicle = async (req: Request, res: Response) => {
+      const id: any = req.params.id;
+  
+      if (id) {
+          try {
+              const bicycle = await Bicycle.findOne({ where: { id: id } });
+              if (bicycle) {
+                  await Bicycle.remove(bicycle);
+                  res.status(200).send("Bicycle deleted successfully");
+              } else {
+                  res.status(404).send("Bicycle not found");
+              }
+          } catch (error) {
+              res.status(500).send("Internal server error");
+          }
+      } else {
+          res.status(400).send("Invalid request");
+      }
+  };
+  
+    

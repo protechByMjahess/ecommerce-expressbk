@@ -8,6 +8,6 @@ import {Request, Response} from "express";
 export const bicycle_router = express.Router();
 
 bicycle_router.post('/bicycles', add_bycicle);
-bicycle_router.delete('/delete', delete_bycicle);
+bicycle_router.delete('/delete/:id', delete_bycicle);
 
 export default bicycle_router;
