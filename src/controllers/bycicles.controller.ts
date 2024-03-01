@@ -36,5 +36,9 @@ export const add_bycicle=async (req:Request, res:Response) => {
     const result =  await Bicycle.find();
     res.json(result);
 }
+export const get_bycicle=async (req:Request, res:Response) => {
+    
+    res.send("hello")
+}
   
     
