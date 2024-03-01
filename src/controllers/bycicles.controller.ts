@@ -31,5 +31,8 @@ export const add_bycicle=async (req:Request, res:Response) => {
           res.status(400).send("Invalid request");
       }
   };
+
+  export const all_bycicle=async (req:Request, res:Response) => {
+    res.send('hello all')}
   
     
