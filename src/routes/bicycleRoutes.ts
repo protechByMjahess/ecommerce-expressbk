@@ -7,7 +7,7 @@ import {Request, Response} from "express";
 
 export const bicycle_router = express.Router();
 bicycle_router.get("/allBycicle", all_bycicle);
-bicycle_router.get("/get_bycicle",get_bycicle);
+bicycle_router.get("/get_bycicle/:id",get_bycicle);
 
 bicycle_router.post('/bicycles', add_bycicle);
 bicycle_router.delete('/delete/:id', delete_bycicle);

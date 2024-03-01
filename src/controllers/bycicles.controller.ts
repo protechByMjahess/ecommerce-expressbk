@@ -38,7 +38,15 @@ export const add_bycicle=async (req:Request, res:Response) => {
 }
 export const get_bycicle=async (req:Request, res:Response) => {
     
-    res.send("hello")
+    const user_id:any =req.params.id;
+    const user = await Bicycle.findOne({where:{id:user_id}});
+
+    if(user?.id){
+        // return user;
+        res.json(user);
+    }else{
+        return null;
+    }
 }
   
     
