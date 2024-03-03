@@ -64,13 +64,31 @@ export const s_update_bycicle =async (req:Request,res:Response)=>{
 }
 
 export const search_bicycle = async (req: Request, res: Response) => {
-    const { name } = req.body;
-    if (name) {
-      const bicycles = await Bicycle.find({ where: { name: Like(`%${name}%`) } });
-      return res.json(bicycles);
-    } else {
-      return res.status(400).json({ message: "No name to search" });
+    const { name, page = 1, limit = 10, sortField = 'name', sortOrder = 'ASC' } = req.body;
+
+    if (!name) {
+        return res.status(400).json({ message: "No name to search" });
     }
-  }
+
+    try {
+        const [result, total] = await Bicycle.findAndCount({
+            where: { name: Like(`%${name}%`) },
+            order: { [sortField]: sortOrder as 'ASC' | 'DESC' },
+            take: limit,
+            skip: (page - 1) * limit
+        });
+
+        return res.json({
+            data: result,
+            total,
+            page,
+            totalPages: Math.ceil(total / limit)
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Failed to search bicycles" });
+    }
+}
+
   
     
