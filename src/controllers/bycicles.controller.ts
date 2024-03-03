@@ -1,6 +1,8 @@
 import {Request, Response} from "express";
 import { Bicycle } from '../entities/Bicycle';
 import { getRepository } from 'typeorm';
+import {Like} from 'typeorm';
+
 export const add_bycicle=async (req:Request, res:Response) => {
     try {
       const bicycleRepository = getRepository(Bicycle);
@@ -42,7 +44,6 @@ export const get_bycicle=async (req:Request, res:Response) => {
     const user = await Bicycle.findOne({where:{id:user_id}});
 
     if(user?.id){
-        // return user;
         res.json(user);
     }else{
         return null;
@@ -61,5 +62,15 @@ export const s_update_bycicle =async (req:Request,res:Response)=>{
         
     }
 }
+
+export const search_bicycle = async (req: Request, res: Response) => {
+    const { name } = req.body;
+    if (name) {
+      const bicycles = await Bicycle.find({ where: { name: Like(`%${name}%`) } });
+      return res.json(bicycles);
+    } else {
+      return res.status(400).json({ message: "No name to search" });
+    }
+  }
   
     
