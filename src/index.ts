@@ -27,7 +27,7 @@ app.post('/insertTrackDetails', function(req,res){
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
-// app.use("/api/auth", auth_route)
+app.use("/api/auth", auth_route)
 app.use('/api/bicycle', bicycle_router);
 
 
