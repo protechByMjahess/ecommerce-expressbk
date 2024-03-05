@@ -23,23 +23,23 @@ export const s_login=async(req:Request,res:Response)=>{
     }
 }
 
-export const s_signup=async(req:Request,res:Response)=>{
-    const {email,password, name, age, phone}= req.body;
-    const check_user=await User.findOne({where:{email:email,password:password}});
-    if(check_user){
-        let r={
-            message:'account allready exist',
-            state:false
-        }
-        return r;
-    } else{
-        const user = await User.save({name:name,phone:phone,email:email,password:password,age:age});
-        const token = jwt.sign({ userId: user.id }, 'youtube', { expiresIn: '10d' });
-       let obj ={
-        user:user,
-        token:token,
-        message:'create accoun succusfully'
-       }
-       return obj
+export const s_signup = async (req: Request, res: Response) => {
+    const { email, password, name, age, phone, role } = req.body;
+    const check_user = await User.findOne({ where: { email: email, password: password } });
+    if (check_user) {
+      let r = {
+        message: 'account already exists',
+        state: false
+      }
+      return r;
+    } else {
+      const user = await User.save({ name: name, phone: phone, email: email, password: password, age: age, role: role });
+      const token = jwt.sign({ userId: user.id, role: role }, 'youtube', { expiresIn: '10d' });
+      let obj = {
+        user: user,
+        token: token,
+        message: 'create account successfully'
+      }
+      return obj
     }
-}
+  }

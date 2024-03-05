@@ -21,6 +21,9 @@ export class User extends BaseEntity {
   @Column({nullable:true})
   email!: string;
 
+  @Column({ nullable: false, default: 'user' }) // Default role is 'user'
+  role!: string;
+
   @OneToMany(()=>Post,(post)=>post.user)
   posts!:Post[]
 }
