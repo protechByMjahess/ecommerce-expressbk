@@ -4,7 +4,7 @@ import { createConnection } from 'typeorm';
 import { User } from './entities/User';
 import { post_route } from "./routes/post.route";
 import { auth_route } from "./routes/auth.route";
-import { isAuthenticated } from "./middleware/isAuthenticated";
+// import { isAuthenticated } from "./middleware/isAuthenticated";
 import bicycle_router from "./routes/bicycleRoutes";
 import { multer_router } from "./routes/multer";
 

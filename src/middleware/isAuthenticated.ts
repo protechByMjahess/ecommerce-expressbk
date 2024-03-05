@@ -10,7 +10,7 @@ declare global {
     }
 }
 
-export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
+export const userAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
     if (!req.headers["authorization"]) {
         return res.status(400).json({ success: false, message: "no authorization headers available" });
     }
