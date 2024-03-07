@@ -7,6 +7,7 @@ export const add_bycicle=async (req:Request, res:Response) => {
     try {
       const bicycleRepository = getRepository(Bicycle);
       const newBicycle = bicycleRepository.create(req.body);
+      console.log(newBicycle);
       await bicycleRepository.save(newBicycle);
       res.status(201).send(newBicycle);
     } catch (err) {

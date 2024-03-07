@@ -19,7 +19,7 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var upload = multer();
 app.use('/upload', multer_router)
-app.use('/myCarte', myCarte_router);
+
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(upload.array())
 app.post('/insertTrackDetails', function(req,res){
@@ -31,6 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use("/api/auth", auth_route)
 app.use('/api/bicycle', bicycle_router);
+app.use('/myCarte', myCarte_router);
 
 
 // app.use(isAuthenticated)

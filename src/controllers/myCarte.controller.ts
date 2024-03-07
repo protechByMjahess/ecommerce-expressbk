@@ -1,6 +1,13 @@
 // myCarte.controller.ts
-import express, { Request, Response } from 'express';
+import {Request, Response} from "express";
+// import { Bicycle } from '../entities/Bicycle';
+// import { getRepository } from 'typeorm';
+import {Like} from 'typeorm';
+import { getRepository } from 'typeorm';
 import jwt from 'jsonwebtoken';
+
+import { Bicycle } from '../entities/Bicycle';
+import { myCarte } from '../entities/myCarte.entities';
 
 export const add_carte = async (req: Request, res: Response) => {
   const token = req.headers.authorization?.split(' ')[1];
@@ -11,9 +18,37 @@ export const add_carte = async (req: Request, res: Response) => {
   try {
     const decodedToken = jwt.verify(token, 'youtube') as { userId: string };
     console.log('userId:', decodedToken.userId);
-    res.status(200).json({ userId: decodedToken.userId });
+    // res.status(200).json({ userId: decodedToken.userId });
+
+    const bicycleRepository = getRepository(myCarte);
+    const newBicycle = bicycleRepository.create(req.body);
+    // await bicycleRepository.save(newBicycle);
+    console.log(newBicycle);
+    res.send(newBicycle);
+
+
   } catch (err) {
     console.error(err); // Log the error for debugging
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+
+
+
+
+
+
+export const test_carte=async (req:Request, res:Response) => {
+    try {
+      const bicycleRepository = getRepository(Bicycle);
+      const newBicycle = bicycleRepository.create(req.body);
+      console.log(newBicycle);
+      await bicycleRepository.save(newBicycle);
+      res.status(201).send(newBicycle);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Failed to add bicycle');
+    }}
+
+   
