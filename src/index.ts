@@ -1,12 +1,13 @@
 import express from "express";
 import { user_route } from "./routes/user.route";
 import { createConnection } from 'typeorm';
-import { User } from './entities/User';
+// import { User } from './entities/User';
 import { post_route } from "./routes/post.route";
 import { auth_route } from "./routes/auth.route";
 // import { isAuthenticated } from "./middleware/isAuthenticated";
 import bicycle_router from "./routes/bicycleRoutes";
 import { multer_router } from "./routes/multer";
+import myCarte_router from "./routes/myCarte.route";
 
 const app = express();
 // const multer = require('multer');
@@ -18,6 +19,7 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var upload = multer();
 app.use('/upload', multer_router)
+app.use('/myCarte', myCarte_router);
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(upload.array())
 app.post('/insertTrackDetails', function(req,res){
