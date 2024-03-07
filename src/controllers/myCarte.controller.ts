@@ -39,16 +39,6 @@ export const add_carte = async (req: Request, res: Response) => {
 
 
 
-export const test_carte=async (req:Request, res:Response) => {
-    try {
-      const bicycleRepository = getRepository(Bicycle);
-      const newBicycle = bicycleRepository.create(req.body);
-      console.log(newBicycle);
-      await bicycleRepository.save(newBicycle);
-      res.status(201).send(newBicycle);
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('Failed to add bicycle');
-    }}
+
 
    
