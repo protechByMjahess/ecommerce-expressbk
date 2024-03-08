@@ -1,12 +1,8 @@
 // myCarte.controller.ts
-import {Request, Response} from "express";
-// import { Bicycle } from '../entities/Bicycle';
-// import { getRepository } from 'typeorm';
-import {Like} from 'typeorm';
+import { Request, Response } from "express";
 import { getRepository } from 'typeorm';
 import jwt from 'jsonwebtoken';
 
-import { Bicycle } from '../entities/Bicycle';
 import { myCarte } from '../entities/myCarte.entities';
 
 export const add_carte = async (req: Request, res: Response) => {
@@ -18,27 +14,20 @@ export const add_carte = async (req: Request, res: Response) => {
   try {
     const decodedToken = jwt.verify(token, 'youtube') as { userId: string };
     console.log('userId:', decodedToken.userId);
-    // res.status(200).json({ userId: decodedToken.userId });
 
     const bicycleRepository = getRepository(myCarte);
-    const newBicycle = bicycleRepository.create(req.body);
-    // await bicycleRepository.save(newBicycle);
+    const newBicycle = bicycleRepository.create({
+      ...req.body,
+      userId: decodedToken.userId,
+    });
     console.log(newBicycle);
-    res.send(newBicycle);
+    
+    await bicycleRepository.save(newBicycle);
 
+    res.status(201).json({ message: 'Bicycle added successfully', data: newBicycle });
 
   } catch (err) {
-    console.error(err); // Log the error for debugging
+    console.error(err);
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-
-
-
-
-
-
-
-
-
-   
