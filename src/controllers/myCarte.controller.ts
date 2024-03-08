@@ -1,4 +1,3 @@
-// myCarte.controller.ts
 import { Request, Response } from "express";
 import { getRepository } from 'typeorm';
 import jwt from 'jsonwebtoken';
@@ -16,15 +15,19 @@ export const add_carte = async (req: Request, res: Response) => {
     console.log('userId:', decodedToken.userId);
 
     const bicycleRepository = getRepository(myCarte);
-    const newBicycle = bicycleRepository.create({
-      ...req.body,
-      userId: decodedToken.userId,
-    });
-    console.log(newBicycle);
-    
-    await bicycleRepository.save(newBicycle);
+    const products = req.body.products;
 
-    res.status(201).json({ message: 'Bicycle added successfully', data: newBicycle });
+    for (const product of products) {
+      const newBicycle = bicycleRepository.create({
+        ...product,
+        userId: decodedToken.userId,
+      });
+      console.log(newBicycle);
+
+      await bicycleRepository.save(newBicycle);
+    }
+
+    res.status(201).json({ message: 'Bicycles added successfully' });
 
   } catch (err) {
     console.error(err);
