@@ -18,6 +18,7 @@ const app = express();
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var upload = multer();
+app.use('/uploads', express.static('uploads'));
 app.use('/upload', multer_router)
 
 app.use(bodyParser.urlencoded({extended:true}))
