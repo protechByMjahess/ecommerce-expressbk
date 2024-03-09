@@ -57,15 +57,10 @@ export const s_update_bycicle =async (req:Request,res:Response)=>{
     const{name,description,phone,age, price, imageUrl, imageSwiper, size, condition}=req.body;
     console.log(req.body);
 
-    // if (!uid || !name || !description || !phone || !age || !price || !imageUrl || !imageSwiper || !size || !condition){
-    //     console.log("some data missing");
-    //     return "some data missing";
-        
-    // }else{
+   
         const x = await Bicycle.update({id:uid},{name:name, description:description, age:age,condition:condition, price:price,size:size, imageUrl:imageUrl, imageSwiper:imageSwiper});
         res.json( x);
-        
-    // }
+   
 }
 
 export const search_bicycle = async (req: Request, res: Response) => {

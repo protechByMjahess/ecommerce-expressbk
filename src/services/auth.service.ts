@@ -2,26 +2,30 @@ import {Request,Response} from "express";
 import {User} from "../entities/User";
 import jwt from 'jsonwebtoken';
 
-export const s_login=async(req:Request,res:Response)=>{
-    const {email,password}= req.body;
-    const check_user=await User.findOne({where:{email:email,password:password}});
-    if(check_user){
-        const token = jwt.sign({userId:check_user.id},'youtube',{expiresIn:'1d'});
-        let obj={
-            user:check_user,
-            token:token,
-            message:'login succesfull'
-        }
-        return obj;
-    } else{
-        let obj={
-            user:null,
-            token:null,
-            message:'login failed'
-        }
-        return obj;
+export const s_login = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  const check_user = await User.findOne({ where: { email: email, password: password } });
+  if (check_user) {
+    const token = jwt.sign({ userId: check_user.id, role: check_user.role }, 'youtube', { expiresIn: '10d' });
+    let obj = {
+      user: check_user,
+      token: token,
+      message: 'login successful'
     }
+    return obj;
+  } else {
+    let obj = {
+      user: null,
+      token: null,
+      message: 'login failed'
+    }
+    return obj;
+  }
 }
+
+
+
+
 
 export const s_signup = async (req: Request, res: Response) => {
     const { email, password, name, age, phone, role } = req.body;
