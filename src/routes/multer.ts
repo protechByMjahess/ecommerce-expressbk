@@ -21,7 +21,7 @@ multer_router.post('/multer', upload.single('image'), (req: Request, res: Respon
     }
     const imagePath = req.protocol + '://' + req.get('host') + '/uploads/' + req.file.filename;
     console.log('Image uploaded:', imagePath);
-    res.send('File uploaded successfully!');
+    res.send(imagePath);
 });
 
 export default multer_router;

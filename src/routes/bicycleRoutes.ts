@@ -7,7 +7,7 @@ import {  adminAuthenticated, userAuthenticated } from '../middleware/isAuthenti
 
 
 export const bicycle_router = express.Router();
-bicycle_router.get("/allBycicle",adminAuthenticated ,all_bycicle);
+bicycle_router.get("/allBycicle",all_bycicle);
 bicycle_router.get("/get_bycicle/:id",get_bycicle);
 bicycle_router.post("/update/:id",s_update_bycicle);
 bicycle_router.post("/search",search_bicycle)

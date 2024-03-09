@@ -52,8 +52,10 @@ export const get_bycicle=async (req:Request, res:Response) => {
 }
 
 export const s_update_bycicle =async (req:Request,res:Response)=>{
+    
     const uid:any =req.params.id;
     const{name,description,phone,age, price, imageUrl, imageSwiper, size, condition}=req.body;
+    console.log(req.body);
 
     if (!uid || !name || !description || !phone || !age || !price || !imageUrl || !imageSwiper || !size || !condition){
         return "some data missing";
