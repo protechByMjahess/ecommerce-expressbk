@@ -63,3 +63,18 @@ console.log(products);
       return res.status(500).json({ message: "Failed to search cart history" });
   }
 };
+
+export const s_delete_user =async (req:Request,res:Response)=>{
+  const id:any = req.params.id;
+if (id) {
+  const myCartee = await myCarte.findOne({ where: { id:id } });
+  if(myCartee){
+      await myCarte.remove(myCartee);
+      res.send("hello")
+      return true;
+  }else{
+      return "user not found"
+  }
+  
+}
+}
