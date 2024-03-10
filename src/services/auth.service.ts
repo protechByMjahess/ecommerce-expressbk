@@ -44,6 +44,8 @@ export const s_signup = async (req: Request, res: Response) => {
         token: token,
         message: 'create account successfully'
       }
+      console.log("account created")
+      console.log(obj);
       return obj
     }
   }

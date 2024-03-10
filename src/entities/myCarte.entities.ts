@@ -13,6 +13,9 @@ export class myCarte extends BaseEntity {
   description!: string;
 
   @Column()
+  quantity!: string;
+
+  @Column()
   name!: string;
 
   @Column()

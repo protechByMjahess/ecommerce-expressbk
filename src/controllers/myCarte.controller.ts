@@ -7,8 +7,10 @@ import {Like} from 'typeorm';
 import { myCarte } from '../entities/myCarte.entities';
 
 export const add_carte = async (req: Request, res: Response) => {
+  console.log("no token");
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
+    
     return res.status(401).json({ message: 'Authorization token not provided' });
   }
 
