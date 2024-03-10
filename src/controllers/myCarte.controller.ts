@@ -7,12 +7,13 @@ import {Like} from 'typeorm';
 import { myCarte } from '../entities/myCarte.entities';
 
 export const add_carte = async (req: Request, res: Response) => {
-  console.log("no token");
+  
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
     
     return res.status(401).json({ message: 'Authorization token not provided' });
   }
+
 
   try {
     const decodedToken = jwt.verify(token, 'youtube') as { userId: string };
@@ -20,13 +21,14 @@ export const add_carte = async (req: Request, res: Response) => {
 
     const bicycleRepository = getRepository(myCarte);
     const products = req.body.products;
+    console.log(products);
 
     for (const product of products) {
       const newBicycle = bicycleRepository.create({
         ...product,
         userId: decodedToken.userId,
       });
-      console.log(newBicycle);
+      // console.log(newBicycle);
 
       await bicycleRepository.save(newBicycle);
     }
@@ -41,29 +43,23 @@ export const add_carte = async (req: Request, res: Response) => {
 
 
 export const search_cart_history = async (req: Request, res: Response) => {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) {
-        return res.status(401).json({ message: 'Authorization token not provided' });
-    }
-    const decodedToken = jwt.verify(token, 'youtube') as { userId: string };
-    console.log('userId:', decodedToken.userId);
+  // console.log("fhiehfuirehfiuhfiruehfiurehfiurhfihfirhf")
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
+      return res.status(401).json({ message: 'Authorization token not provided' });
+  }
 
-    const { page = 1, limit = 10, sortField = 'name', sortOrder = 'ASC' } = req.body;
+  try {
+      const decodedToken = jwt.verify(token, 'youtube') as { userId: string };
+      console.log('userId:', decodedToken.userId);
 
-    try {
-        const [result, total] = await myCarte.findAndCount({
-            where: { userId: decodedToken.userId }, // Use userId from decoded token
-            order: { [sortField]: sortOrder as 'ASC' | 'DESC' },
-            take: limit,
-            skip: (page - 1) * limit
-        });
-
-        return res.json({
-            data: result
-        });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: "Failed to search cart history" });
-    }
-}
-
+      const products = await myCarte.find({
+          where: { userId: decodedToken.userId }
+      });
+console.log(products);
+      return res.json({ data: products });
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Failed to search cart history" });
+  }
+};
