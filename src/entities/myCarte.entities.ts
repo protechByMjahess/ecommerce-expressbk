@@ -1,10 +1,15 @@
 // myCarte.entity.ts
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, PrimaryColumn } from 'typeorm';
 
-@Entity('myCartee')
+@Entity('myCarteLaster')
 export class myCarte extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id!: number;
+  
+  
+
+  // @Column()
+  // unique!: string;
 
   
 
