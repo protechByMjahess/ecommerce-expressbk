@@ -16,6 +16,7 @@ export const add_bycicle=async (req:Request, res:Response) => {
     }}
 
     export const delete_bycicle = async (req: Request, res: Response) => {
+        console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
       const id: any = req.params.id;
   
       if (id) {
