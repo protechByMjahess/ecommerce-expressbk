@@ -65,7 +65,10 @@ console.log(products);
 };
 
 export const s_delete_user =async (req:Request,res:Response)=>{
+  console.log("la2atet")
   const id:any = req.params.id;
+  console.log("gggggggggggggggg");
+  console.log(id);
 if (id) {
   const myCartee = await myCarte.findOne({ where: { id:id } });
   if(myCartee){
@@ -73,6 +76,7 @@ if (id) {
       res.send("hello")
       return true;
   }else{
+    console.log("user not found")
       return "user not found"
   }
   
